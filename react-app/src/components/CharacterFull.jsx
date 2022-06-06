@@ -3,13 +3,18 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 
 import useCharacter from "./hooks/useCharacter";
 import dateStringifier from "../utils/dateStringifier";
+import useFavorites from "./hooks/useFavorites";
 
-const Character = () => {
+const CharacterFull = () => {
     const { characterId } = useParams();
-    const { character, isLoading } = useCharacter(characterId);
+    const [character, isLoading] = useCharacter(characterId);
+    const [favorites, handleFavorites] = useFavorites();
 
     if (isLoading) {
         return;
@@ -40,7 +45,7 @@ const Character = () => {
             >
                 <Typography
                     variant="h4"
-                    component="h2"
+                    component="h1"
                     align="center"
                     gutterBottom
                 >
@@ -57,18 +62,44 @@ const Character = () => {
                             variant="h6"
                             component="p"
                             display="inline"
-                            sx={{ fontWeight: "bolder" }}
+                            sx={{ fontWeight: 500 }}
                         >
                             {item.name}:&nbsp;
                         </Typography>
-                        <Typography variant="h6" component="p" display="inline">
+                        <Typography
+                            variant="h6"
+                            component="p"
+                            display="inline"
+                            sx={{ fontWeight: 300 }}
+                        >
                             {item.data}
                         </Typography>
                     </Box>
                 ))}
+                <Box sx={{ display: "flex", justifyContent: "center" }}>
+                    <Button
+                        variant="outlined"
+                        color="secondary"
+                        endIcon={
+                            favorites.includes(character.id) ? (
+                                <BookmarkIcon />
+                            ) : (
+                                <BookmarkBorderIcon />
+                            )
+                        }
+                        onClick={() => {
+                            handleFavorites(character.id);
+                        }}
+                        sx={{ m: 2 }}
+                    >
+                        {favorites.includes(character.id)
+                            ? "Remove from Favorites"
+                            : "Add to Favorites"}
+                    </Button>
+                </Box>
             </Paper>
         );
     }
 };
 
-export default Character;
+export default CharacterFull;

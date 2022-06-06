@@ -1,19 +1,22 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 
-import { Link } from "react-router-dom";
-
-const settings = ["Liked characters", "Logout"];
+const accountMenu = [
+    { name: "Favorite characters", link: "/favorites" },
+    { name: "Logout", link: "/logout" }
+];
 
 const Header = () => {
     const [anchorElNav, setAnchorElNav] = useState(null);
@@ -41,14 +44,13 @@ const Header = () => {
                     <Typography
                         variant="h6"
                         noWrap
-                        component="a"
-                        href="/"
+                        component={Link}
+                        to={"/"}
                         sx={{
                             mr: 2,
                             display: { xs: "none", md: "flex" },
                             fontFamily: "monospace",
                             fontWeight: 700,
-                            letterSpacing: ".3rem",
                             color: "inherit",
                             textDecoration: "none"
                         }}
@@ -70,7 +72,7 @@ const Header = () => {
                             onClick={handleOpenNavMenu}
                             color="inherit"
                         >
-                            {/* <MenuIcon /> */}
+                            <MenuIcon />
                         </IconButton>
                         {/* Mobile */}
                         <Menu
@@ -91,35 +93,38 @@ const Header = () => {
                                 display: { xs: "block", md: "none" }
                             }}
                         >
-                            <Link to="/">
-                                <MenuItem>
-                                    <Typography textAlign="center">
-                                        Characters
-                                    </Typography>
-                                </MenuItem>
-                            </Link>
-                            <Link to="/about">
-                                <MenuItem>
-                                    <Typography textAlign="center">
-                                        About
-                                    </Typography>
-                                </MenuItem>
-                            </Link>
+                            <MenuItem
+                                component={Link}
+                                to={"/"}
+                                onClick={handleCloseNavMenu}
+                            >
+                                <Typography textAlign="center">
+                                    Characters
+                                </Typography>
+                            </MenuItem>
+                            <MenuItem
+                                component={Link}
+                                to={"/about"}
+                                onClick={handleCloseNavMenu}
+                            >
+                                <Typography textAlign="center">
+                                    About
+                                </Typography>
+                            </MenuItem>
                         </Menu>
                         {/*  */}
                     </Box>
                     <Typography
-                        variant="h5"
+                        variant="h6"
+                        component={Link}
+                        to={"/"}
                         noWrap
-                        component="a"
-                        href=""
                         sx={{
                             mr: 2,
                             display: { xs: "flex", md: "none" },
                             flexGrow: 1,
                             fontFamily: "monospace",
                             fontWeight: 700,
-                            letterSpacing: ".3rem",
                             color: "inherit",
                             textDecoration: "none"
                         }}
@@ -132,24 +137,24 @@ const Header = () => {
                             display: { xs: "none", md: "flex" }
                         }}
                     >
-                        <Link to="/">
-                            <Button
-                                sx={{ my: 2, color: "white", display: "block" }}
-                            >
-                                Characters
-                            </Button>
-                        </Link>
-                        <Link to="/about">
-                            <Button
-                                sx={{ my: 2, color: "white", display: "block" }}
-                            >
-                                About
-                            </Button>
-                        </Link>
+                        <Button
+                            component={Link}
+                            to={"/"}
+                            sx={{ my: 2, color: "white", display: "block" }}
+                        >
+                            Characters
+                        </Button>
+                        <Button
+                            component={Link}
+                            to={"/about"}
+                            sx={{ my: 2, color: "white", display: "block" }}
+                        >
+                            About
+                        </Button>
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
+                        <Tooltip title="Account">
                             <IconButton
                                 onClick={handleOpenUserMenu}
                                 sx={{ p: 0 }}
@@ -176,13 +181,15 @@ const Header = () => {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {settings.map((setting) => (
+                            {accountMenu.map((accountItem) => (
                                 <MenuItem
-                                    key={setting}
+                                    component={Link}
+                                    to={accountItem.link}
+                                    key={accountItem.name}
                                     onClick={handleCloseUserMenu}
                                 >
                                     <Typography textAlign="center">
-                                        {setting}
+                                        {accountItem.name}
                                     </Typography>
                                 </MenuItem>
                             ))}

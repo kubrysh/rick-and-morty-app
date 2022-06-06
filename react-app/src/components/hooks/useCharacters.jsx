@@ -10,8 +10,8 @@ const useCharacters = (page) => {
         const fetchCharacters = async () => {
             try {
                 const response = await axios.get(
-                    `https://rickandmortyapi.com/api/character${
-                        page ? `/?page=${page}` : ``
+                    `https://rickandmortyapi.com/api/character/${
+                        page ? `?page=${page}` : ``
                     }`
                 );
                 setCharacters(response.data.results);
@@ -24,7 +24,7 @@ const useCharacters = (page) => {
 
         fetchCharacters();
     }, [page]);
-    return { characters, info, isLoading };
+    return [characters, info, isLoading];
 };
 
 export default useCharacters;

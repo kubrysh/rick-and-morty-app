@@ -5,9 +5,10 @@ import Container from "@mui/material/Container";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Characters from "./components/Characters";
+import CharactersPage from "./components/CharactersPage";
 import About from "./components/About";
-import Character from "./components/Character";
+import Favorites from "./components/Favorites";
+import CharacterFull from "./components/CharacterFull";
 import PageNotFound from "./components/PageNotFound";
 
 const theme = createTheme();
@@ -20,13 +21,16 @@ const App = () => {
             <Container component="main" maxWidth="md" sx={{ my: 2 }}>
                 <Switch>
                     <Route exact path="/">
-                        <Characters />
+                        <CharactersPage />
                     </Route>
                     <Route path="/about">
                         <About />
                     </Route>
+                    <Route path="/favorites">
+                        <Favorites />
+                    </Route>
                     <Route path="/:characterId">
-                        <Character />
+                        <CharacterFull />
                     </Route>
                     <Route path="*">
                         <PageNotFound />
