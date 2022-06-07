@@ -1,25 +1,35 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const useCharacter = (id) => {
-    const [character, setCharacter] = useState({});
+// Retrieve single character or multiple characters by ID
+const useCharacter = (ids) => {
+    const [character, setCharacter] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchCharacter = async () => {
             try {
                 const response = await axios.get(
-                    `https://rickandmortyapi.com/api/character/${id}`
+                    `https://rickandmortyapi.com/api/character/${
+                        ids.isArray ? JSON.stringify(ids) : ids
+                    }`
                 );
                 setCharacter(response.data);
                 setIsLoading(false);
-            } catch (e) {
-                console.error(e);
+            } catch (err) {
+                if (err.response.status === 404) {
+                    setCharacter([]);
+                }
+                setIsLoading(false);
             }
         };
 
-        fetchCharacter();
-    }, [id]);
+        if (ids.length > 0) {
+            fetchCharacter();
+        } else {
+            setCharacter([]);
+        }
+    }, [ids]);
     return [character, isLoading];
 };
 

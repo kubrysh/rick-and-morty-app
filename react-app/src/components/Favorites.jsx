@@ -1,13 +1,13 @@
 import Typography from "@mui/material/Typography";
 
-import useFavCharacters from "./hooks/useFavCharacters";
+import useCharacter from "./hooks/useCharacter";
 import CharacterShort from "./CharacterShort";
 import useFavorites from "./hooks/useFavorites";
 
 const Favorites = () => {
 
     const [favorites, handleFavorites] = useFavorites();
-    const [characters, isLoading] = useFavCharacters(favorites);
+    const [characters, isLoading] = useCharacter(favorites);
 
     return (
         <>
