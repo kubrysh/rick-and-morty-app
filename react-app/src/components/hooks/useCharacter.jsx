@@ -11,7 +11,7 @@ const useCharacter = (ids) => {
             try {
                 const response = await axios.get(
                     `https://rickandmortyapi.com/api/character/${
-                        ids.isArray ? JSON.stringify(ids) : ids
+                        Array.isArray(ids) ? JSON.stringify(ids) : ids
                     }`
                 );
                 setCharacter(response.data);
