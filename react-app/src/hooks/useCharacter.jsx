@@ -5,6 +5,7 @@ import axios from "axios";
 const useCharacter = (ids) => {
     const [character, setCharacter] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [isError, setIsError] = useState(false);
 
     useEffect(() => {
         const fetchCharacter = async () => {
@@ -15,11 +16,16 @@ const useCharacter = (ids) => {
                     }`
                 );
                 setCharacter(response.data);
+                setIsError(false);
                 setIsLoading(false);
             } catch (err) {
-                if (err.response.status === 404) {
+                if (
+                    err.response.status === 404 ||
+                    err.response.status === 500
+                ) {
                     setCharacter([]);
                 }
+                setIsError(true);
                 setIsLoading(false);
             }
         };
@@ -28,9 +34,11 @@ const useCharacter = (ids) => {
             fetchCharacter();
         } else {
             setCharacter([]);
+            setIsError(true);
+            setIsLoading(false);
         }
     }, [ids]);
-    return [character, isLoading];
+    return [character, isLoading, isError];
 };
 
 export default useCharacter;

@@ -1,6 +1,6 @@
+import { Link as RouterLink } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
-import { Link as RouterLink } from "react-router-dom";
 
 const About = () => {
     return (

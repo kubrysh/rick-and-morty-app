@@ -1,8 +1,8 @@
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-import useSearchField from "./hooks/useSearchField";
+import useSearchField from "../hooks/useSearchField";
 
-const CharacterSearch = () => {
+const SearchField = () => {
     const [
         characters,
         searchInput,
@@ -45,4 +45,4 @@ const CharacterSearch = () => {
     );
 };
 
-export default CharacterSearch;
+export default SearchField;

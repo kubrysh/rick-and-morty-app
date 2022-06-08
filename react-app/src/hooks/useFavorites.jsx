@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 
+// Retrieving and writing favorite characters to localStorage
 const useFavorites = () => {
     const [favorites, setFavorites] = useState(
         JSON.parse(localStorage.getItem("likedCharacters")) ?? []

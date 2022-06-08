@@ -9,7 +9,7 @@ import CharactersPage from "./components/CharactersPage";
 import About from "./components/About";
 import Favorites from "./components/Favorites";
 import CharacterFull from "./components/CharacterFull";
-import PageNotFound from "./components/PageNotFound";
+import NotFound from "./components/NotFound";
 
 const theme = createTheme();
 
@@ -18,7 +18,11 @@ const App = () => {
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <Header />
-            <Container component="main" maxWidth="md" sx={{ my: 2 }}>
+            <Container
+                component="main"
+                maxWidth="md"
+                sx={{ my: 2}}
+            >
                 <Switch>
                     <Route exact path="/">
                         <CharactersPage />
@@ -33,11 +37,11 @@ const App = () => {
                         <CharacterFull />
                     </Route>
                     <Route path="*">
-                        <PageNotFound />
+                        <NotFound />
                     </Route>
                 </Switch>
             </Container>
-            <Footer />
+            <Footer/>
         </ThemeProvider>
     );
 };

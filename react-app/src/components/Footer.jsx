@@ -3,8 +3,14 @@ import Box from "@mui/material/Box";
 
 const Footer = () => {
     return (
-        <Box component="footer" sx={{ bgcolor: "background.paper", py: 3 }}>
-            <Typography variant="h6" align="center" gutterBottom>
+        <Box
+            component="footer"
+            sx={{
+                bgcolor: "background.paper",
+                mt: "auto"
+            }}
+        >
+            <Typography variant="h6" align="center" sx={{ p: 2 }}>
                 Ihor Kubrysh — {new Date().getFullYear()}
             </Typography>
         </Box>

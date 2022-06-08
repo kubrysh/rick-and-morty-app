@@ -1,5 +1,6 @@
 import { useHistory, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+
 import useCharacters from "./useCharacters";
 
 const useSearchField = () => {

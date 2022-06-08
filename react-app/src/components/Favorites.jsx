@@ -1,13 +1,17 @@
 import Typography from "@mui/material/Typography";
 
-import useCharacter from "./hooks/useCharacter";
+import useCharacter from "../hooks/useCharacter";
 import CharacterShort from "./CharacterShort";
-import useFavorites from "./hooks/useFavorites";
+import useFavorites from "../hooks/useFavorites";
+import NotFound from "./NotFound";
 
 const Favorites = () => {
-
     const [favorites, handleFavorites] = useFavorites();
-    const [characters, isLoading] = useCharacter(favorites);
+    const [characters, isLoading, isError] = useCharacter(favorites);
+
+    if (isLoading) {
+        return;
+    }
 
     return (
         <>
@@ -21,10 +25,8 @@ const Favorites = () => {
                     isFavorite={favorites.includes(character.id)}
                     onClick={handleFavorites}
                 />
-            )) || isLoading}
-            {characters.length === 0 && <Typography variant="h5" component="p">
-                You don't have any favorite characters yet!😅
-            </Typography>}
+            )) || isError}
+            {isError && <NotFound favorites={true} />}
         </>
     );
 };
